@@ -1,0 +1,31 @@
+@import '_colours';
+@import '../utilities/_mixins';
+
+$borders-data: (
+  base: (
+    thin: 1px solid color(white),
+    thick: 4px solid color(white)
+  ),
+  dark: (
+    thin: 1px solid color(sky),
+    thick: 4px solid color(sky)
+  ),
+  transparent: (
+    thin: 1px solid transparent,
+    thick: 4px solid transparent
+  )
+);
+
+/// Returns the default border.
+/// @param {String} $variant [base] - The border variant key.
+/// @return {List} The border value.
+
+@function border($variant: base, $thickness: thin) {
+  $fetched-value: map-get(map-get($borders-data, $variant), $thickness);
+
+  @if $fetched-value {
+    @return $fetched-value;
+  } @else {
+    @error 'Border variant `#{$variant}` not found. Available variants: #{available-names($borders-data)}';
+  }
+}

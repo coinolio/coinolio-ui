@@ -1,0 +1,120 @@
+@import '_border-radius';
+@import '_colours';
+@import '_borders';
+@import '_controls';
+
+//
+// FORMS
+// =====
+//
+
+
+label {
+  display: block;
+}
+
+input[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none; // http://stackoverflow.com/questions/11127891
+}
+
+.required-field > label::after {
+  content: '*';
+  color: red;
+  margin-left: 0.25rem;
+}
+
+//
+// CONTROLS
+// ========
+// Used to markup and style all form controls: inputs, textareas, selects etc.
+//
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+
+@mixin control--text() {
+  display: block;
+  width: 100%;
+  min-height: control-height();
+  padding: control-vertical-padding() 0.5em;
+  border: border(dark);
+  @include text-style-input;
+  border-radius: border-radius();
+
+  &:focus {
+    border-color: color(teal);
+    outline: 0;
+  }
+
+  &.is-danger {
+    border-color: color(red);
+  }
+}
+
+.control--text {
+  @include control--text();
+  -webkit-appearance: none;
+}
+
+.control--choice {
+  @include control--text();
+  height: $base--line-height + 0.5em; // match the line-height and vertical padding of $control--text
+}
+
+.control--multilined {
+  @include control--text();
+  overflow: auto;
+  resize: none;
+}
+
+.control--boolean {
+  margin-right: 10px;
+
+  span + & {
+    margin-right: 0;
+    margin-left: 10px;
+  }
+}
+
+.control--field {
+  line-height: 1;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.control--simple {
+  background: none;
+  border: 0;
+  border-bottom: border(base, thick);
+  color: color(white);
+  border-radius: 0;
+
+  @include placeholder {
+    color: color(sky, dark);
+  }
+}
+
+.control--dark {
+  border-color: color(black, light);
+  color: color(black, light);
+}
+
+.control--inline {
+  display: inline-block;
+  width: auto;
+}

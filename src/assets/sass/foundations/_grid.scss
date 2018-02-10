@@ -1,0 +1,65 @@
+//
+// GRID STYLESHEET
+// ================
+// The grid system
+//
+
+//
+// SETUP
+//
+$neat-grid: (
+  columns: 12,
+  gutter: $grid--gutter,
+  media: 1036px,
+);
+
+.grid {
+  @include grid-container;
+}
+
+.grid--contained {
+  max-width: rem(1400px);
+  margin: 0 auto;
+}
+
+.grid--full {
+  @include grid-collapse;
+}
+
+.grid--gutterless {
+  .grid__item {
+    margin: 0;
+  }
+}
+
+.grid__equal {
+  display: flex;
+
+  .grid__item {
+    flex: 1 0 auto;
+  }
+}
+
+.grid__item {
+  @include grid-column(1);
+}
+
+.grid__item--one-quarter {
+  @include grid-column(3);
+}
+
+.grid__item--one-half {
+  @include grid-column(6);
+}
+
+.grid__item--three-quarters {
+  @include grid-column(9);
+}
+
+.grid__item--50 {
+  @include grid-column(12);
+
+  @include grid-media($neat-grid){
+    @include grid-column(6);
+  }
+}

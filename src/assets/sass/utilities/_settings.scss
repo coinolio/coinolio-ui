@@ -1,0 +1,84 @@
+//
+// SETTINGS
+// ========
+// Project specific setings which can be changed to modify the basic look and
+// feel of the project with little effort.
+//
+// 1. BREAKPOINTS AND MEDIA QUERIES
+// 2. COLOURS
+// 3. TYPEFACES
+// 4. BASE STYLES
+// 5. GRID
+//
+
+
+//
+// 1. BREAKPOINTS AND MEDIA QUERIES
+// Setup standard widths to pass to media queries
+//
+
+$mq--mobile--portrait  : 0px;
+$mq--mobile--landscape : 400px;
+$mq--tablet--portrait  : 550px;
+$mq--tablet--landscape : 800px;
+$mq--desktop--small    : 960px;
+$mq--desktop--medium   : 1280px;
+$mq--desktop--large    : 1600px;
+
+// Common aliases
+$mq--mobile  : $mq--mobile--portrait;
+$mq--tablet  : $mq--tablet--portrait;
+$mq--desktop : $mq--desktop--small;
+
+
+//
+// 2. COLOURS
+//
+
+// Common Project Colours
+$color--green: #7BB55B;
+$color--viridian-green  : #11999E;
+$color--turquoise  : #30E3CA;
+$color--bubbles: #DEF2EE;
+$color--black : #212121;
+$color--grey  : #868e96;
+$color--off-white : #EFF3F6;
+$color--white : #fff;
+
+// Brand Colours
+$color--primary : $color--turquoise;
+
+// Default Notification Colours
+$color--success : $color--green;
+$color--notice  : #4791a9;
+$color--warning : #dc7f2a;
+$color--error   : #ca4427;
+
+
+//
+// 3. TYPEFACES
+// Amend variable names to suit fonts used.
+//
+
+$font--base : -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+
+//
+// 4. BASE STYLES
+//
+
+$base--font-heading : $font--base;
+$base--font-body    : $font--base;
+$base--font-prose   : $font--base;
+$base--font-color   : $color--black;
+$base--font-size    : 18px;
+$base--line-height  : 1.618;
+$base--spacing      : #{$base--line-height}em;
+$base--body-bg      : $color--white;
+
+
+//
+// 5. GRID
+//
+
+$grid--gutter : 2em;

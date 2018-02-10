@@ -1,0 +1,327 @@
+//
+// TYPOGRAPHIC STYLES
+// ==================
+// Base typography styles
+//
+// Layout styles for typographic elements should live in each component
+//
+@import '../utilities/_mixins';
+@import '_colours';
+@import '_breakpoint';
+
+$typography-condensed: em(640px);
+
+$font-family-data: (
+  base: $base--font-body,
+  prose: $base--font-prose,
+  monospace: #{Monaco, Consolas, 'Lucida Console', monospace}
+);
+
+$line-height-data: (
+  caption: (
+    base: rem(20px),
+    large-screen: rem(16px)
+  ),
+  heading: (
+    base: rem(24px)
+  ),
+  subheading: (
+    base: rem(16px)
+  ),
+  input: (
+    base: rem(24px)
+  ),
+  body: (
+    small: rem(16px),
+    base: rem(20px)
+  ),
+  display-x-large: (
+    base: rem(36px),
+    large-screen: rem(44px)
+  ),
+  display-large: (
+    base: rem(28px),
+    large-screen: rem(32px)
+  ),
+  display-medium: (
+    base: rem(28px),
+    large-screen: rem(32px)
+  ),
+  display-small: (
+    base: rem(24px),
+    large-screen: rem(24px)
+  )
+);
+
+$font-size-data: (
+  caption: (
+    base: rem(13px),
+    large-screen: rem(12px)
+  ),
+  heading: (
+    base: rem(17px),
+    large-screen: rem(16px)
+  ),
+  subheading: (
+    base: rem(13px),
+    large-screen: rem(12px)
+  ),
+  input: (
+    base: rem(16px),
+    large-screen: rem(14px)
+  ),
+  body: (
+    small: rem(12px),
+    base: rem(15px),
+    large-screen: rem(14px)
+  ),
+  display-x-large: (
+    base: rem(27px),
+    large-screen: rem(42px)
+  ),
+  display-large: (
+    base: rem(24px),
+    large-screen: rem(28px)
+  ),
+  display-medium: (
+    base: rem(21px),
+    large-screen: rem(26px)
+  ),
+  display-small: (
+    base: rem(16px),
+    large-screen: rem(20px)
+  )
+);
+
+/// Returns the font stack for a given family.
+///
+/// @param {String} $family - The key for the given family.
+/// @return {Number} The font stack for the family.
+
+@function font-family($family: base) {
+  $fetched-value: map-get($font-family-data, $family);
+
+  @if $fetched-value != null {
+    @return $fetched-value;
+  } @else {
+    @error 'Font family `#{$family}` not found. Available font families: #{available-names($font-family-data)}';
+  }
+}
+
+/// Returns the line height for a given text style and variant.
+///
+/// @param {String} $style - The font style.
+/// @param {String} $variant [base] - The variant on the font-size.
+/// @return {Number} The line-height for the text-style.
+
+@function line-height($style, $variant: base) {
+  $fetched-line-height: map-get(map-get($line-height-data, $style), $variant);
+
+  @if type-of($fetched-line-height) != null {
+    @return $fetched-line-height;
+  } @else {
+    @error 'Line height `#{$style} - #{$variant}` not found. Available line heights: #{available-names($line-height-data)}';
+  }
+}
+
+/// Returns the font size for a given text style and variant.
+///
+/// @param {String} $style - The font style.
+/// @param {String} $variant [base] - The variant on the font-size.
+/// @return {Number} The font-size for the text-style.
+
+@function font-size($style, $variant: base) {
+  $fetched-font-size: map-get(map-get($font-size-data, $style), $variant);
+
+  @if type-of($fetched-font-size) != null {
+    @return $fetched-font-size;
+  } @else {
+    @error 'Line height `#{$style} - #{$variant}` not found. Available font sizes: #{available-names($line-height-data)}';
+  }
+}
+
+$typography-condensed: em(640px);
+
+@mixin when-typography-not-condensed {
+  @include breakpoint-after($typography-condensed) { @content; }
+}
+
+@mixin when-typography-condensed {
+  @include breakpoint-before($typography-condensed) { @content; }
+}
+
+@mixin text-style-caption {
+  font-size: font-size(caption);
+  font-weight: 400;
+  line-height: line-height(caption);
+
+  @include when-typography-not-condensed {
+    font-size: font-size(caption, large-screen);
+    line-height: line-height(caption, large-screen);
+  }
+}
+
+@mixin text-style-heading {
+  font-size: font-size(heading);
+  font-weight: 600;
+  line-height: line-height(heading);
+
+  @include when-typography-not-condensed {
+    font-size: font-size(heading, large-screen);
+  }
+}
+
+@mixin text-style-heavy-heading {
+  font-size: font-size(heading);
+  font-weight: 700;
+  line-height: line-height(heading);
+  text-transform: uppercase;
+
+  @include when-typography-not-condensed {
+    font-size: font-size(heading, large-screen);
+  }
+}
+
+@mixin text-style-subheading {
+  font-size: font-size(subheading);
+  font-weight: 700;
+  line-height: line-height(subheading);
+  text-transform: uppercase;
+
+  @include when-typography-not-condensed {
+    font-size: font-size(subheading, large-screen);
+  }
+}
+
+@mixin text-style-input {
+  font-size: font-size(input);
+  font-weight: 400;
+  line-height: line-height(input);
+
+  text-transform: initial;
+  letter-spacing: initial;
+
+  @include when-typography-not-condensed {
+    font-size: font-size(input, large-screen);
+  }
+}
+
+@mixin text-style-body {
+  font-size: font-size(body);
+  font-weight: 400;
+  line-height: line-height(body);
+
+  text-transform: initial;
+  letter-spacing: initial;
+
+  @include when-typography-not-condensed {
+    font-size: font-size(body, large-screen);
+  }
+}
+
+@mixin text-style-display-x-large {
+  font-size: font-size(display-x-large);
+  font-weight: 600;
+  line-height: line-height(display-x-large);
+
+  @include when-typography-not-condensed {
+    font-size: font-size(display-x-large, large-screen);
+    line-height: line-height(display-x-large, large-screen);
+  }
+}
+
+@mixin text-style-display-large {
+  font-size: font-size(display-large);
+  font-weight: 600;
+  line-height: line-height(display-large);
+
+  @include when-typography-not-condensed {
+    font-size: font-size(display-large, large-screen);
+    line-height: line-height(display-large, large-screen);
+  }
+}
+
+@mixin text-style-display-medium {
+  font-size: font-size(display-medium);
+  font-weight: 400;
+  line-height: line-height(display-medium);
+
+  @include when-typography-not-condensed {
+    font-size: font-size(display-medium, large-screen);
+    line-height: line-height(display-medium, large-screen);
+  }
+}
+
+@mixin text-style-display-small {
+  font-size: font-size(display-small);
+  font-weight: 400;
+  line-height: line-height(display-small);
+
+  @include when-typography-not-condensed {
+    font-size: font-size(display-small, large-screen);
+    line-height: line-height(display-small, large-screen);
+  }
+}
+
+@mixin text-emphasis-placeholder() {
+  color: color(ink, lightest);
+}
+
+@mixin text-emphasis-subdued($for-background: null) {
+  color: color(ink, lighter, $for-background: $for-background);
+}
+
+@mixin text-emphasis-strong {
+  font-weight: 700;
+}
+
+@mixin text-emphasis-normal($for-background: null) {
+  font-weight: 400;
+  color: color(ink, $for-background: $for-background);
+}
+
+html {
+  font-size: $base--font-size;
+  font-family: $base--font-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: color(white);
+  font-size: 1em;
+  color: color(black);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  font-family: $base--font-heading;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: 2.375em;
+}
+
+h2 {
+  font-size: 1.6em;
+}
+
+h3 {
+  font-size: 1.4em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+h5{
+  font-size: 1.1em;
+}
+
+h6 {
+  font-size: 1em;
+}
