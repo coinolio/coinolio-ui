@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 import store from '../store';
 import Application from '@/pages/Application';
 import Login from '@/pages/Login';
 
-Vue.use(Router)
+Vue.use(Router);
 
 const router = new Router({
   routes: [
@@ -25,17 +25,17 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.auth)) {
+  if (to.matched.some((record) => record.meta.auth)) {
     if (!store.state.authUser) {
       next({
-          path: '/login'
-      })
+        path: '/login'
+      });
     } else {
-        next()
+      next();
     }
   } else {
-    next()
+    next();
   }
-})
+});
 
 export default router;

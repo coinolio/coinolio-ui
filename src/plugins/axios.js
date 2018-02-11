@@ -22,6 +22,12 @@ axios.interceptors.request.use( (config) => {
 });
 
 // Throw nice http errors & keep SSR safe
+/**
+ * Parse errors
+ *
+ * @param {Error} e
+ * @returns {Object}
+ */
 function onError(e) {
   if (!inBrowser) {
     return {
@@ -40,14 +46,24 @@ function onError(e) {
   }, response);
 }
 
-// Wap promise
+/**
+ * Wrap promise to parse data
+ *
+ * @param {Promise} p - The promise to be wrapped
+ * @returns {Promise}
+ */
 function wrapPromise(p) {
   return p.then(function(res) {
     return res.data || {};
   }).catch(onError);
 }
 
-// Opts Enhancer
+/**
+ *
+ * @param {Object} opts
+ * @param {string} _url
+ * @returns {Object}
+ */
 function wrapOpts(opts = {}, _url) {
   const url = _url || opts.url || '';
 

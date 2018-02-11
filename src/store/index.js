@@ -14,5 +14,5 @@ export default new Vuex.Store({
     trades,
     snapshots,
     exchanges
-  },
+  }
 });

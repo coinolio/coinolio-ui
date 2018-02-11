@@ -15,7 +15,7 @@ export default {
     MainHeader,
     MainFooter
   }
-}
+};
 </script>
 <style lang="scss" src='@/assets/sass/main.scss'></style>
 

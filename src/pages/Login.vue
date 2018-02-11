@@ -27,35 +27,27 @@ export default {
         username: '',
         password: ''
       }
-    }
+    };
   },
   methods: {
-      login() {
-        this.$store.dispatch('login', this.user)
-          .then(() => {
-            // this.$router.replace({path: '/admin/library'});
-            window.location.href = '/admin/library';
-          })
-          .catch((e) => {
-            this.$message({
-              message: e.message || 'There has been a problem logging in',
-              type: 'error'
-            });
+    login() {
+      this.$store.dispatch('login', this.user)
+        .then(() => {
+          // this.$router.replace({path: '/admin/library'});
+          window.location.href = '/admin/library';
+        })
+        .catch((e) => {
+          this.$message({
+            message: e.message || 'There has been a problem logging in',
+            type: 'error'
           });
-      },
-      logout () {
-        this.$store.dispatch('logout');
-      },
-    }
-  };
-
-  function requiredValidator(rule, value, callback) {
-    if (value === '') {
-      callback(new Error(`Please enter a ${rule.field}`));
-    } else {
-      callback();
+        });
+    },
+    logout() {
+      this.$store.dispatch('logout');
     }
   }
+};
 </script>
 <style lang='scss'>
   .container {
