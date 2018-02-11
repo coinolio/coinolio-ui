@@ -1,0 +1,72 @@
+$item-min-size: rem(220px);
+
+.form {
+  margin-top: -1 * spacing();
+  margin-left: -1 * spacing(loose);
+}
+
+.form-title {
+  margin-bottom: -1 * spacing(tight);
+  padding: spacing() spacing(loose) 0;
+}
+
+.fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.field {
+  flex: 1 1 $item-min-size;
+  margin-top: spacing();
+  margin-left: spacing(loose);
+  min-width: $item-min-size;
+  max-width: calc(100% - #{spacing(loose)});
+
+  .form--condensed & {
+    flex-basis: (0.5 * $item-min-size);
+    min-width: (0.5 * $item-min-size);
+  }
+}
+
+.label {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  -webkit-tap-highlight-color: transparent;
+
+  label {
+    @include text-style-label;
+    display: block;
+    flex: 1 1 auto;
+    color: currentColor;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.label--heavy {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    -webkit-tap-highlight-color: transparent;
+
+    label {
+      @include text-style-heavy-heading;
+    }
+  }
+
+.field--heavy {
+  label {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: rem(20px);
+  }
+  .faded {
+    color: color(sky, dark);
+    opacity: 0.8;
+  }
+  .help {
+    font-size: rem(14px);
+    color: color(red);
+  }
+}

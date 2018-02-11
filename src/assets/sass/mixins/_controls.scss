@@ -1,11 +1,3 @@
-@import '_borders';
-@import '_border-radius';
-@import '_colours';
-@import '_duration';
-@import '_easing';
-@import '_shadows';
-@import '_typography';
-
 @function control-height() {
   @return rem(20px);
 }

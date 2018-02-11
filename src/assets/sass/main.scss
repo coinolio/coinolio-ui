@@ -8,8 +8,7 @@
 //
 // SETUP
 //
-@import 'utilities/_settings';
-@import 'utilities/_mixins';
+@import 'includes';
 
 //
 // FOUNDATIONS
@@ -20,27 +19,17 @@
 @import 'foundations/_typography';
 @import 'foundations/_list';
 @import 'foundations/_form';
-@import 'foundations/_colours';
-@import 'foundations/_duration';
-@import 'foundations/_easing';
-@import 'foundations/_form';
-@import 'foundations/_shadows';
-@import 'foundations/_spacing';
-@import 'foundations/_buttons';
-@import 'foundations/_icons';
-@import 'foundations/_controls';
-@import 'foundations/_layout';
-@import 'foundations/_breakpoint';
-@import 'foundations/_z-index';
 
 //
 // LAYOUT SECTIONS
 //
+@import 'layout/container';
 
 
 //
 // GENERIC COMPONENTS
 //
+@import 'components/form';
 @import 'components/button';
 
 //
