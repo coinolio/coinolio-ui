@@ -26,7 +26,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.auth)) {
-    if (!store.state.authUser) {
+    if (!store.state.auth.token) {
       next({
         path: '/login'
       });

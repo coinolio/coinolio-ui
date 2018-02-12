@@ -34,7 +34,7 @@ export default {
       this.$store.dispatch('login', this.user)
         .then(() => {
           // this.$router.replace({path: '/admin/library'});
-          window.location.href = '/admin/library';
+          window.location.href = '/';
         })
         .catch((e) => {
           this.$message({

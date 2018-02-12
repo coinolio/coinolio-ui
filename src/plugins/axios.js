@@ -2,7 +2,7 @@ import Axios from 'axios';
 import Vue from 'vue';
 
 const inBrowser = typeof window !== 'undefined';
-const API_URL = process.env.API_URL || 'http://localhost:4040';
+const API_URL = process.env.API_URL || 'http://localhost:8080';
 
 const axios = Axios.create({
   baseURL: API_URL + (process.env.API_PREFIX || '/api'),

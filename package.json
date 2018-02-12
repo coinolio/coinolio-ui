@@ -26,11 +26,13 @@
   ],
   "dependencies": {
     "axios": "^0.17.1",
+    "js-cookie": "^2.2.0",
     "pug": "^2.0.0-rc.4",
     "vee-validate": "^2.0.3",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.4.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^6.0.2",

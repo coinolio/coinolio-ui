@@ -1,11 +1,8 @@
 import {setToken, $get, $post} from '@/plugins/axios';
-const inBrowser = typeof window !== 'undefined';
-import tough from 'tough-cookie';
-const Cookie = tough.Cookie;
-const cookiejar = new tough.CookieJar();
 
 const state = {
-  authUser: null
+  authUser: null,
+  token: null
 };
 
 const mutations = {
@@ -22,18 +19,6 @@ const mutations = {
 };
 
 const actions = {
-  nuxtServerInit({commit}, {req}) {
-    if (req.cookies) {
-      if (req.cookies.user) {
-        commit('setUser', req.cookies.user);
-
-        if (req.cookies.user.token) {
-          commit('setToken', req.cookies.user.token);
-        }
-      }
-    }
-  },
-
   fetchUser({commit, state}) {
     if (state.authUser) {
       commit('setToken', state.authUser.token);
@@ -46,10 +31,6 @@ const actions = {
       password
     })
       .then((res) => {
-        if (inBrowser) {
-          cookiejar.setCookie(Cookie.fromJSON({user: res, token: res.token}), '', (err, cookie) => {});
-        }
-
         commit('setUser', res);
         commit('setToken', res.token);
       })
