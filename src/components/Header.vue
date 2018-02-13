@@ -3,7 +3,7 @@
     authed-nav(v-if='user')
 </template>
 <script>
-import AuthedNav from './navigation/Authed';
+import AuthedNav from '@/components/navigation/Authed';
 
 export default {
   components: {
@@ -11,13 +11,17 @@ export default {
   },
   data() {
     return {
-      user: this.$store.state.authUser
+      user: this.$store.state.auth.authUser
     };
   },
   methods: {}
 };
 </script>
 <style lang='scss'>
+  .main-header {
+    margin-bottom: rem(50px);
+  }
+
   .navigation {
     display: flex;
     flex: 1;
@@ -51,6 +55,7 @@ export default {
       text-decoration: none;
       @include text-style-body;
       transition: all linear duration();
+      color: color(purple);
 
       .navigation--vertical & {
         width: 100%;
@@ -68,10 +73,10 @@ export default {
       }
 
       &.router-link-exact-active {
-        box-shadow: 0px 2px 0px 0px color(teal);
+        box-shadow: 0px 2px 0px 0px color(purple);
 
         .navigation--vertical & {
-          box-shadow: 2px 0px 0px 0px color(teal);
+          box-shadow: 2px 0px 0px 0px color(purple);
         }
       }
 
@@ -156,7 +161,6 @@ export default {
     height: rem(58px);
     align-items: stretch;
     background-color: color(white);
-    border-bottom: border(dark, thin);
   }
 
   .top-navigation__branding {
@@ -190,9 +194,4 @@ export default {
     margin-left: auto;
     padding-right: spacing();
   }
-
-  .top-navigation__item--seperate {
-    border-left: border(dark, thin);
-  }
-
 </style>
