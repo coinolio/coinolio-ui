@@ -4,6 +4,11 @@ const state = {
   userTrades: [],
   selectedTrade: null
 };
+const getters = {
+  trades: (state) => {
+    return state.userTrades;
+  }
+};
 
 const mutations = {
   setUserTrades: function(state, trades) {
@@ -95,6 +100,7 @@ const actions = {
 
 export default {
   state,
+  getters,
   actions,
   mutations
 };

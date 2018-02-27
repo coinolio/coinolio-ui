@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {setToken} from '@/plugins/axios';
 import createPersistedState from 'vuex-persistedstate';
 import * as Cookies from 'js-cookie';
 
@@ -17,11 +18,18 @@ export default new Vuex.Store({
     snapshots,
     exchanges
   },
-  plugins: [createPersistedState({
-    storage: {
-      getItem: (key) => Cookies.get(key),
-      setItem: (key, value) => Cookies.set(key, value, {expires: 3}),
-      removeItem: (key) => Cookies.remove(key)
+  plugins: [
+    createPersistedState({
+      storage: {
+        getItem: (key) => Cookies.get(key),
+        setItem: (key, value) => Cookies.set(key, value, {expires: 3}),
+        removeItem: (key) => Cookies.remove(key)
+      }
+    }),
+    (store) => {
+      if (store.state.auth.token) {
+        setToken(store.state.auth.token);
+      }
     }
-  })]
+  ]
 });

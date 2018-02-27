@@ -5,6 +5,12 @@ const state = {
   selectedSnapshot: null
 };
 
+const getters = {
+  snapshots: (state) => {
+    return state.userSnapshots;
+  }
+};
+
 const mutations = {
   setUserSnapshots: function(state, snapshots) {
     state.userSnapshots = snapshots;
@@ -83,6 +89,7 @@ const actions = {
 
 export default {
   state,
+  getters,
   actions,
   mutations
 };

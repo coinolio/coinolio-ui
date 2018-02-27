@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '../store';
-import Application from '@/pages/Application';
+import Dashboard from '@/pages/Dashboard';
+import Trades from '@/pages/Trades';
 import Login from '@/pages/Login';
 
 Vue.use(Router);
@@ -15,8 +16,16 @@ const router = new Router({
     },
     {
       path: '/',
-      name: 'Application',
-      component: Application,
+      name: 'Dashboard',
+      component: Dashboard,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/trades',
+      name: 'Trades',
+      component: Trades,
       meta: {
         auth: true
       }
