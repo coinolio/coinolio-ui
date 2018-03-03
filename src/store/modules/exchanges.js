@@ -5,6 +5,17 @@ const state = {
   selectedExchange: null
 };
 
+const getters = {
+  exchanges: (state) => {
+    return state.userExchanges;
+  },
+  enabledExchanges: (state) => {
+    return state.userExchanges.filter((e) => {
+      return e.enabled;
+    });
+  }
+};
+
 const mutations = {
   setUserExchanges: function(state, exchanges) {
     state.userExchanges = exchanges;
@@ -83,6 +94,7 @@ const actions = {
 
 export default {
   state,
+  getters,
   actions,
   mutations
 };
