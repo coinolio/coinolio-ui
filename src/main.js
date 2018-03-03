@@ -3,6 +3,7 @@
 import Vue from 'vue';
 
 import ElementUI from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/en';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import App from './App';
@@ -11,7 +12,7 @@ import store from './store';
 
 import VeeValidate from 'vee-validate';
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, {locale});
 Vue.use(VeeValidate);
 Vue.config.productionTip = false;
 
