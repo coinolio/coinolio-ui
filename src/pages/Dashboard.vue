@@ -1,18 +1,23 @@
 <template lang='pug'>
   .container
-    h1 index
     line-chart(:chart-data='parsedSnapshots', :options='lineOptions')
+    bar-chart(:chart-data='parsedAssets', :options='barOptions')
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import union from 'lodash.union';
 
-import LineChart from '../components/Chart';
+import LineChart from '../components/LineChart';
+import BarChart from '../components/BarChart';
+import PolarAreaChart from '../components/PolarAreaChart';
 
 export default {
   name: 'Application',
   components: {
-    LineChart
+    LineChart,
+    BarChart,
+    PolarAreaChart
   },
   data() {
     return {
@@ -51,12 +56,16 @@ export default {
             }
           ]
         }
+      },
+      barOptions: {
+        responsive: true,
+        maintainAspectRatio: false
       }
     };
   },
   created() {
     this.$store.dispatch('fetchSnapshots');
-    setTimeout(() => {
+    setInterval(() => {
       this.$store.dispatch('fetchSnapshots');
     }, 120000);
   },
@@ -92,6 +101,43 @@ export default {
             yAxisID: 'btc',
             backgroundColor: 'RGBA(192, 169, 66, 0.3)',
             data: parsedEntriesBTC
+          }
+        ]
+      };
+    },
+    parsedAssets() {
+      const snapshots = this.snapshots;
+      const combined = snapshots.filter((s) => {
+        return s.exchange === 'combined';
+      });
+      let dataCombined = [];
+      let labels = [];
+
+      if (combined.length > 0) {
+        const assets = combined[0].snapshot.balances;
+        const keys = Object.keys(assets);
+
+        labels = union(labels, keys);
+
+        for (let i=0; i < keys.length; i++) {
+          const key = keys[i];
+          const keyIndex = labels.indexOf(key);
+
+          const val = assets[key].valueBTC;
+          if (keyIndex) {
+            const c = dataCombined[keyIndex] || 0;
+            dataCombined[keyIndex] = c + val;
+          }
+        }
+      }
+
+      return {
+        labels,
+        datasets: [
+          {
+            label: 'Combined',
+            backgroundColor: 'RGBA(192, 169, 66, 0.3)',
+            data: dataCombined
           }
         ]
       };

@@ -34,7 +34,11 @@ const mutations = {
 
 const actions = {
   fetchSnapshots({commit}) {
-    return $get('/snapshots')
+    return $get('/snapshots', {
+      params: {
+        limit: 720
+      }
+    })
       .then((res) => {
         commit('setUserSnapshots', res);
       })
