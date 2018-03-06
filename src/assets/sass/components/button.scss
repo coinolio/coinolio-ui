@@ -85,6 +85,19 @@ $large-vertical-padding: ($large-min-height - rem(20px) - rem(2px)) / 2;
   }
 }
 
+.btn--affirmative {
+  @include button-filled(color(green), color(green, dark));
+  @include recolor-icon(color(white));
+
+  &.btn--disabled {
+    @include recolor-icon(color(white));
+    background: color(green, light);
+    border-color: color(green, light);
+    box-shadow: none;
+    color: color(white);
+  }
+}
+
 .btn--outline {
   @include button-outline(color(ink, lighter));
 

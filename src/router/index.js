@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import store from '../store';
 import Dashboard from '@/pages/Dashboard';
 import Trades from '@/pages/Trades';
+import Exchanges from '@/pages/Exchanges';
 import Login from '@/pages/Login';
 
 Vue.use(Router);
@@ -26,6 +27,14 @@ const router = new Router({
       path: '/trades',
       name: 'Trades',
       component: Trades,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/exchanges',
+      name: 'Exchanges',
+      component: Exchanges,
       meta: {
         auth: true
       }

@@ -115,7 +115,7 @@ export default {
             label: 'Combined BTC',
             yAxisID: 'btc',
             pointRadius: 0,
-            backgroundColor: 'RGBA(192, 169, 66, 0.3)',
+            backgroundColor: 'RGBA(35, 210, 210, 0.3)',
             data: parsedEntriesBTC
           }
         ]
@@ -136,7 +136,7 @@ export default {
 
         datasets.push({
           label: 'Combined',
-          backgroundColor: 'RGBA(192, 169, 66, 0.3)',
+          backgroundColor: 'RGBA(80, 66, 192, 0.3)',
           data: dataCombined
         });
 

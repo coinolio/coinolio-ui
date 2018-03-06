@@ -2,6 +2,7 @@ import {$get, $post, $put, $del} from '@/plugins/axios';
 
 const state = {
   userExchanges: [],
+  validExchanges: [],
   selectedExchange: null
 };
 
@@ -13,6 +14,9 @@ const getters = {
     return state.userExchanges.filter((e) => {
       return e.enabled;
     });
+  },
+  validExchanges: (state) => {
+    return state.validExchanges;
   }
 };
 
@@ -34,6 +38,9 @@ const mutations = {
       return c.id === exchangeId;
     });
     state.userExchanges.splice(exchangeIndex, 1);
+  },
+  setValidExchanges: function(state, exchanges) {
+    state.validExchanges = exchanges;
   }
 };
 
@@ -42,6 +49,16 @@ const actions = {
     return $get('/exchanges')
       .then((res) => {
         commit('setUserExchanges', res);
+      })
+      .catch((error) => {
+        throw new Error(JSON.stringify(error));
+      });
+  },
+
+  fetchValidExchanges({commit}) {
+    return $get('/exchanges/valid')
+      .then((res) => {
+        commit('setValidExchanges', res);
       })
       .catch((error) => {
         throw new Error(JSON.stringify(error));
