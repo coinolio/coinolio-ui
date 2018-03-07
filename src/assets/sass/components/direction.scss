@@ -1,0 +1,12 @@
+.direction {
+  display: inline-block;
+  margin-left: spacing(extra-tight);
+}
+
+.direction--up {
+  color: color(green);
+}
+
+.direction--down {
+  color: color(red);
+}

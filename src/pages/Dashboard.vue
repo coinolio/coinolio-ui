@@ -1,5 +1,24 @@
 <template lang='pug'>
   .container
+    h1.h2 Overview
+    el-row
+      el-col(:span='12')
+        h3 Current
+        ul.list--unstyled(v-if='latestSnapshot')
+          li
+            strong Latest Fiat:&nbsp;
+            span {{(latestSnapshot.data.snapshot.totalAssetValue * latestSnapshot.data.snapshot.BTC.price).toFixed(2)}}
+            small &nbsp;({{latestSnapshot.data.snapshot.BTC.currency}})
+            i(v-if='latestSnapshot.direction.fiat === 1', class="direction direction--up el-icon-arrow-up")
+            i(v-if='latestSnapshot.direction.fiat === -1', class="direction direction--down el-icon-arrow-down")
+
+          li
+            strong Latest BTC:&nbsp;
+            span {{latestSnapshot.data.snapshot.totalAssetValue}}
+            small &nbsp;(BTC)
+            i(v-if='latestSnapshot.direction.btc === 1', class="direction direction--up el-icon-arrow-up")
+            i(v-if='latestSnapshot.direction.btc === -1', class="direction direction--down el-icon-arrow-down")
+
     el-row
       el-col(:span='12')
         line-chart(:chart-data='parsedSnapshots', :options='lineOptions')
@@ -85,6 +104,31 @@ export default {
   computed: {
     ...mapGetters(['snapshots']),
     ...mapGetters(['enabledExchanges']),
+    latestSnapshot() {
+      const combined = this.snapshots.filter((s) => {
+        return s.exchange === 'combined';
+      });
+
+      if (!combined.length) return;
+
+      const ret = {
+        data: combined[0]
+      };
+
+      if (combined[1]) {
+        const lastBTC = combined[0].snapshot.totalAssetValue;
+        const lastFiat = combined[0].snapshot.totalAssetValue * combined[0].snapshot.BTC.price;
+        const prevBTC = combined[1].snapshot.totalAssetValue;
+        const prevFiat = combined[1].snapshot.totalAssetValue * combined[1].snapshot.BTC.price;
+
+        ret.direction = {
+          fiat: lastFiat > prevFiat ? 1 : lastFiat === prevFiat ? 0 : -1,
+          btc: lastBTC > prevBTC ? 1 : lastBTC === prevBTC ? 0 : -1
+        };
+      }
+
+      return ret;
+    },
     parsedSnapshots() {
       const snapshots = this.snapshots;
       const combined = snapshots.filter((s) => {
@@ -193,5 +237,8 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped lang='scss'>
+  .el-row {
+    margin-bottom: rem(20px);
+  }
 </style>
