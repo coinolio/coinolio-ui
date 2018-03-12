@@ -16,7 +16,7 @@
       el-col
         el-card
           button.btn.btn--block.btn--large.btn--affirmative(@click='addExchange') Add exchange
-          el-dialog(title="Add exchange", :visible.sync="addExchangeVisible")
+          el-dialog(title="Exchange", :visible.sync="addExchangeVisible")
             el-form(:model="exchangeForm", label-width="100px")
               el-form-item(label="Exchange")
                 el-select(v-model="exchangeForm.name", placeholder="Please select a zone")
@@ -30,11 +30,14 @@
                 el-input(v-model="exchangeForm.config.password", auto-complete="off")
               el-form-item(label="Enabled")
                 el-switch(v-model="exchangeForm.enabled")
+              el-form-item(v-if='editMode')
+                button.btn.btn--destructive(@click.prevent='deleteExchange') Delete
             span.dialog-footer(slot="footer")
               el-button(@click="clearExchange") Cancel
               el-button(type="primary", @click="submitExchange")
                 span(v-if='!editMode') Create
                 span(v-if='editMode') Save
+
 </template>
 
 <script>
@@ -95,6 +98,20 @@ export default {
         this.$store.dispatch('addExchange', this.exchangeForm);
       }
       this.clearExchange();
+    },
+    deleteExchange() {
+      this.$confirm('This will permanently delete the exchange (existing trades and snapshots will remain). Continue?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      })
+        .then(() => {
+          this.$store.dispatch('removeExchange', this.exchangeForm.id);
+          this.$message({
+            type: 'success',
+            message: 'Delete completed'
+          });
+        });
     }
   }
 };
