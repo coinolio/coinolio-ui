@@ -27,8 +27,8 @@ const mutations = {
   updateExchange: function(state, {index, exchange}) {
     state.userExchanges.splice(index, 1, exchange);
   },
-  addExchange: function(state, photo) {
-    state.userExchanges.push(photo);
+  addExchange: function(state, exchange) {
+    state.userExchanges.push(exchange);
   },
   setSelectedExchange(state, content) {
     state.selectedExchange = content;
