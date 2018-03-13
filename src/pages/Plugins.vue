@@ -20,7 +20,7 @@
             el-form(:model="pluginForm", label-width="100px")
               el-form-item(label="Plugin")
                 el-select(v-model="pluginForm.name", placeholder="Please select a plugin")
-                  el-option(v-for='e in validPlugins', :label="e", :value="e", :key='e')
+                  el-option(v-for='e in validPlugins', :label="e", :value="e", :key='e', :disabled='usedPlugins.includes(e)')
               template(v-if='pluginForm.name === "Telegram"')
                 el-form-item(label="Token")
                   el-input(v-model="pluginForm.config.token", auto-complete="off")
@@ -59,7 +59,12 @@ export default {
     this.$store.dispatch('fetchPlugins');
   },
   computed: {
-    ...mapGetters(['plugins'])
+    ...mapGetters(['plugins']),
+    usedPlugins() {
+      return this.plugins.map((p) => {
+        return p.name;
+      });
+    }
   },
   methods: {
     addPlugin() {
