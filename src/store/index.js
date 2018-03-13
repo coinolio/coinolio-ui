@@ -8,6 +8,7 @@ import auth from './modules/auth';
 import trades from './modules/trades';
 import snapshots from './modules/snapshots';
 import exchanges from './modules/exchanges';
+import plugins from './modules/plugins';
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     auth,
     trades,
     snapshots,
-    exchanges
+    exchanges,
+    plugins
   },
   plugins: [
     createPersistedState({

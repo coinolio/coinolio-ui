@@ -19,7 +19,7 @@
           el-dialog(title="Exchange", :visible.sync="addExchangeVisible")
             el-form(:model="exchangeForm", label-width="100px")
               el-form-item(label="Exchange")
-                el-select(v-model="exchangeForm.name", placeholder="Please select a zone")
+                el-select(v-model="exchangeForm.name", placeholder="Please select an exchange")
                   el-option(v-for='e in validExchanges', :label="e.charAt(0).toUpperCase() + e.slice(1)", :value="e", :key='e')
                   //- https://github.com/ccxt/ccxt#supported-cryptocurrency-exchange-markets
               el-form-item(label="API Key")
