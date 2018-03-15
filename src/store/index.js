@@ -9,6 +9,7 @@ import trades from './modules/trades';
 import snapshots from './modules/snapshots';
 import exchanges from './modules/exchanges';
 import plugins from './modules/plugins';
+import events from './modules/events';
 
 Vue.use(Vuex);
 
@@ -18,7 +19,8 @@ export default new Vuex.Store({
     trades,
     snapshots,
     exchanges,
-    plugins
+    plugins,
+    events
   },
   plugins: [
     createPersistedState({

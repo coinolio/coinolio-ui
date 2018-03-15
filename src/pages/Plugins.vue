@@ -102,7 +102,7 @@ export default {
       this.clearPlugin();
     },
     deletePlugin() {
-      this.$confirm('This will permanently delete the plugin (existing trades and snapshots will remain). Continue?', 'Warning', {
+      this.$confirm('This will permanently delete the plugin. Continue?', 'Warning', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
         type: 'warning'

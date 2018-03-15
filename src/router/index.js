@@ -5,6 +5,7 @@ import Dashboard from '@/pages/Dashboard';
 import Trades from '@/pages/Trades';
 import Exchanges from '@/pages/Exchanges';
 import Plugins from '@/pages/Plugins';
+import Events from '@/pages/Events';
 import Login from '@/pages/Login';
 
 Vue.use(Router);
@@ -44,6 +45,14 @@ const router = new Router({
       path: '/plugins',
       name: 'Plugins',
       component: Plugins,
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: '/events',
+      name: 'Events',
+      component: Events,
       meta: {
         auth: true
       }
