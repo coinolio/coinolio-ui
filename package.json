@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "chart.js": "^2.7.2",
+    "cronstrue": "^1.1.0",
     "d3-timeseries": "^1.0.1",
     "element-ui": "^2.2.1",
     "js-cookie": "^2.2.0",
